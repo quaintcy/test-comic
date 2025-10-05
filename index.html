@@ -33,7 +33,6 @@
       width: auto;
       height: auto;
       object-fit: contain;
-      transition: opacity 0.3s ease;
     }
   </style>
 </head>
@@ -54,11 +53,7 @@
 
     document.body.addEventListener("click", () => {
       current = (current + 1) % images.length;
-      comicImage.style.opacity = 0;
-      setTimeout(() => {
-        comicImage.src = images[current];
-        comicImage.style.opacity = 1;
-      }, 150);
+      comicImage.src = images[current];
     });
 
     window.addEventListener("resize", () => {
