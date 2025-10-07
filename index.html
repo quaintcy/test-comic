@@ -39,9 +39,43 @@
 <body>
   <div id="comic">
     <img id="comicImage" src="https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/start_note.png" alt="Soul Bled Comic">
+<button id="fullscreen-btn" style="
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 10;
+">⛶</button>
+
+    
   </div>
 
   <script>
+// ============================
+// FULLSCREEN FEATURE
+// ============================
+const fullscreenBtn = document.getElementById("fullscreen-btn");
+const comicContainer = document.getElementById("comic-container"); // change this to your actual container ID
+
+fullscreenBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    comicContainer.requestFullscreen().catch(err => {
+      alert(`Error attempting to enable fullscreen: ${err.message}`);
+    });
+  } else {
+    document.exitFullscreen();
+  }
+});
+
+    // ============================
+// COMIC IMAGES & NAVIGATION
+// ============================
     const images = [
       "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/start_note.png",
 "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/cover%20draft%20(1).png",
@@ -63,6 +97,20 @@
     window.addEventListener("resize", () => {
       document.body.style.height = window.innerHeight + "px";
     });
+    
+// ============================
+// KEYBOARD NAVIGATION
+// ============================
+// (Press → to go forward, ← to go back)
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowRight") {
+    nextImage(); // go forward
+  } else if (event.key === "ArrowLeft") {
+    prevImage(); // go backward
+  }
+});
+   
   </script>
 </body>
 </html>
