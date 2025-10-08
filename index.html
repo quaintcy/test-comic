@@ -61,7 +61,7 @@
 // FULLSCREEN FEATURE
 // ============================
 const fullscreenBtn = document.getElementById("fullscreen-btn");
-const comicContainer = document.getElementById("comic-container"); // change this to your actual container ID
+const comicContainer = document.getElementById("comic"); // ✅ Correct container
 
 fullscreenBtn.addEventListener("click", () => {
   if (!document.fullscreenElement) {
@@ -73,36 +73,42 @@ fullscreenBtn.addEventListener("click", () => {
   }
 });
 
-    // ============================
+// ============================
 // COMIC IMAGES & NAVIGATION
 // ============================
-    const images = [
-      "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/start_note.png",
-"https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/cover%20draft%20(1).png",
-      "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/d1.png",
-      "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/d2.png",
-      "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/d3.png",
-      "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/d4.png",
-      "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/d5.png"
-    ];
+const images = [
+  "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/start_note.png",
+  "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/cover%20draft%20(1).png",
+  "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/d1.png",
+  "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/d2.png",
+  "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/d3.png",
+  "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/d4.png",
+  "https://raw.githubusercontent.com/quaintcy/test-comic/refs/heads/main/d5.png"
+];
 
-    let current = 0;
-    const comicImage = document.getElementById("comicImage");
+let current = 0;
+const comicImage = document.getElementById("comicImage");
 
-    document.body.addEventListener("click", () => {
-      current = (current + 1) % images.length;
-      comicImage.src = images[current];
-    });
+function nextImage() {
+  current = (current + 1) % images.length;
+  comicImage.src = images[current];
+}
 
-    window.addEventListener("resize", () => {
-      document.body.style.height = window.innerHeight + "px";
-    });
-    
+function prevImage() {
+  current = (current - 1 + images.length) % images.length;
+  comicImage.src = images[current];
+}
+
+document.body.addEventListener("click", nextImage);
+
+window.addEventListener("resize", () => {
+  document.body.style.height = window.innerHeight + "px";
+});
+
 // ============================
 // KEYBOARD NAVIGATION
 // ============================
 // (Press → to go forward, ← to go back)
-
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") {
     nextImage(); // go forward
@@ -110,7 +116,7 @@ document.addEventListener("keydown", (event) => {
     prevImage(); // go backward
   }
 });
-   
-  </script>
+</script>
+
 </body>
 </html>
